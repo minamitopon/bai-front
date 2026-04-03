@@ -4,7 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./src:/app/src
+      - ./:/app
+      - /app/node_modules
     container_name: bai-front
     command: npm run dev
     ports:
