@@ -1,0 +1,17 @@
+services:
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/app/src
+    container_name: bai-front
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    networks:
+      - bai-network
+
+networks:
+  bai-network:
+    external: true
