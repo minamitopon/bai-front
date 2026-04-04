@@ -20,7 +20,10 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       sass: {
-        additionalData: `@use "@/styles/base/variable.sass" as *\n`,
+        additionalData: (content: string, filePath: string) => {
+          if (filePath.endsWith('variable.sass')) return content;
+          return `@use "@/styles/base/variable.sass" as *\n${content}`;
+        },
       },
     },
   },
