@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client'
 import '@/styles/base/reset.sass'
 import '@/styles/base/variable.sass'
 import '@/styles/base/common.sass'
-import App from './App.tsx'
+import { RouterProvider } from "react-router";
+import router from '@/routes/route.tsx'
 
 if (import.meta.env.DEV) {
   import('@/mocks/browser').then(({ worker }) => {
@@ -13,6 +14,6 @@ if (import.meta.env.DEV) {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>,
 )
