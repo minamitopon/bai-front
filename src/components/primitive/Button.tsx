@@ -4,8 +4,8 @@ import generateClassName from "@/functions/components/generateClassName"
 import styles from "@/styles/components/primitive/button.module.sass"
 
 interface Props {
-  label: string,
-  color: Color,
+  label?: string,
+  color?: Color,
   size?: Size,
   disabled?: boolean,
   waiting?: boolean,
@@ -14,17 +14,19 @@ interface Props {
 
 
 const Button = (props: Props) => {
-  const [size = 'm', desabled = false, waiting = false] = [props.size, props.disabled, props.waiting]
+  const { size = 'm', disabled = false, waiting = false, color = '', label, onClick } = props
   const modifireClassObject = useMemo(() => ({
     [styles[`button`]]: true,
-    [styles[`button--${props.color}`]]: true,
+    [styles[`button--${color}`]]: !!color,
     [styles[`button--${size}`]]: true,
-    [styles.disabled]: desabled,
+    [styles.disabled]: disabled,
     [styles.waiting]: waiting,
-  }), [size, desabled, waiting])
+  }), [color, size, disabled, waiting])
   
   return (
-    <button className={generateClassName(modifireClassObject)} onClick={props.onClick}>{props.label}</button>
+    <button className={generateClassName(modifireClassObject)} onClick={onClick} disabled={disabled || waiting}>
+      {label}
+    </button>
   )
 }
 

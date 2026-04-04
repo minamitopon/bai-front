@@ -17,6 +17,13 @@ export default defineConfig({
       '@': path.join(dirname, 'src'),
     },
   },
+  css: {
+    preprocessorOptions: {
+      sass: {
+        additionalData: `@use "@/styles/base/variable.sass" as *\n`,
+      },
+    },
+  },
   server: {
     host: true,
     port: 3000,
