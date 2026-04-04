@@ -66,7 +66,15 @@ export const Club: Story = {
 
 export const NonLabel: Story = {
   args: {
-    color: "spade",
-    size: "m"
+    color: "white",
+    size: "m",
+    icon: "filter"
   },
+}
+
+export const LabelAndIcon: Story = {
+  args: {
+    label: "Label and Icon",
+    icon: "filter",
+  }
 }
