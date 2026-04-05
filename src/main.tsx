@@ -6,14 +6,19 @@ import '@/styles/base/common.sass'
 import { RouterProvider } from "react-router";
 import router from '@/routes/route.tsx'
 
-if (import.meta.env.DEV) {
-  import('@/mocks/browser').then(({ worker }) => {
-    worker.start();
-  });
+async function enableMocking() {
+  if (import.meta.env.DEV) {
+    const { worker } = await import('@/mocks/browser')
+    return worker.start({
+      onUnhandledRequest: 'bypass',
+    })
+  }
 }
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
-)
+enableMocking().then(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>,
+  )
+})

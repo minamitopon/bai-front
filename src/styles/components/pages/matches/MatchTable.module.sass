@@ -1,0 +1,36 @@
+.match-table
+  width: 100%
+  border: 1px solid #E2E8F0
+  th
+    height: 48px
+    text-align: center
+    vertical-align: middle
+    font-weight: $font-weight-bold
+    background-color: #F8FAFC
+    border-bottom: 1px solid #F1F5F9
+    &.match-table--header-team-one
+      border-left: solid 4px $color-spade
+    &.match-table--header-team-two
+      border-left: solid 4px $color-heart
+  td
+    height: 70px
+    text-align: center
+    vertical-align: middle
+    border-bottom: 1px solid #F1F5F9
+    &.match-table--data-match-name
+      font-weight: $font-weight-bold
+    &.match-table--data-team-one
+      font-weight: $font-weight-bold
+      color: $color-spade
+      border-left: solid 4px $color-spade
+    &.match-table--data-team-two
+      font-weight: $font-weight-bold
+      color: $color-heart
+      border-left: solid 4px $color-heart
+    .match-table--data-link
+      color: $color-spade
+      font-weight: $font-weight-bold
+
+  .match-table-row
+    &:hover
+      background-color: #F8FAFC
