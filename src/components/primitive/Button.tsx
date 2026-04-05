@@ -5,7 +5,7 @@ import generateClassName from "@/functions/components/generateClassName"
 import styles from "@/styles/components/primitive/button.module.sass"
 
 interface Props {
-  label?: string,
+  label?: string | number,
   color?: Color,
   size?: Size,
   disabled?: boolean,
