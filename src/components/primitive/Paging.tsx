@@ -22,30 +22,21 @@ const Paging = ({ current, total, last, pageUp, pageDown, jumpToPage }: Props) =
   const pageNumbers = useMemo(() => {
     const pages: number[] = []
     
-    // 1ページ目の時は最大3ページ表示
     if (current === 1) {
       for (let i = 0; i < 3; i++) {
         const page = current + i
-        if (page <= last) {
-          pages.push(page)
-        }
+        if (page <= last) pages.push(page)
       }
     } else if (current === last) {
-      // 最終ページの場合は前3ページを表示
       for (let i = 0; i < 3; i++) {
         const page = current - i
-        if (page >= 1) {
-          pages.push(page)
-        }
+        if (page >= 1) pages.push(page)
       }
       pages.reverse()
     } else {
-      // 1ページ目でも最終ページでもない場合は現在ページの前後に1ページずつ表示
       for (let i = -1; i <= 1; i++) {
         const page = current + i
-        if (page >= 1 && page <= last) {
-          pages.push(page)
-        }
+        if (page >= 1 && page <= last) pages.push(page)
       }
     }
     return pages
