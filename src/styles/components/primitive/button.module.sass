@@ -16,25 +16,21 @@
     background-color: $color-spade
     &:hover:not(:disabled)
       background-color: $color-spade-dark
-
   &--heart
     color: $color-white
     background-color: $color-heart
     &:hover:not(:disabled)
       background-color: $color-heart-dark
-
   &--diamond
     color: $color-white
     background-color: $color-diamond
     &:hover:not(:disabled)
       background-color: $color-diamond-dark
-
   &--club
     color: $color-white
     background-color: $color-club
     &:hover:not(:disabled)
       background-color: $color-club-dark
-
   &--s
     padding: 4px 8px
     font-size: $font-size-xs
@@ -48,7 +44,9 @@
   &--unlimited
     width: 100%
     padding: 12px
-
+  &--is-active
+    background-color: $color-spade
+    color: $color-white
   &.disabled
     opacity: 0.5
     cursor: not-allowed

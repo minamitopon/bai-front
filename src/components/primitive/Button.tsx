@@ -8,6 +8,7 @@ interface Props {
   label?: string | number,
   color?: Color,
   size?: Size,
+  isActive?: boolean,
   disabled?: boolean,
   waiting?: boolean,
   icon?: IconName
@@ -16,15 +17,16 @@ interface Props {
 
 
 const Button = (props: Props) => {
-  const { size = 'm', disabled = false, waiting = false, color = 'white', label, icon, onClick } = props
+  const { size = 'm', isActive = false, disabled = false, waiting = false, color = 'white', label, icon, onClick } = props
   const modifireClassObject = useMemo(() => ({
     [styles[`button`]]: true,
     [styles[`button--${color}`]]: !!color,
     [styles[`button--${size}`]]: true,
     [styles[`button--border`]]: color === 'white',
-    [styles.disabled]: disabled,
-    [styles.waiting]: waiting,
-  }), [color, size, disabled, waiting])
+    [styles[`button--is-active`]]: isActive,
+    [styles[`button--disabled`]]: disabled,
+    [styles[`button--waiting`]]: waiting,
+  }), [color, size, isActive, disabled, waiting])
   const iconColor = useMemo(() => {
     return color !== 'white' ? 'white' : undefined
   }, [color])

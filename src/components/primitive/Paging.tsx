@@ -18,15 +18,19 @@ const Paging = ({ current, total, pageUp, pageDown, jumpToPage }: Props) => {
   const lastPage = useMemo(() => {
     return Math.ceil(total / 10)
   }, [total])
+  const isActive = (page: number) => {
+    return current === page
+  }
+
   return (
     <div className={styles['paging']}>
       <Text text={currentPosition} />
       <div className={styles['paging__buttons']}>
         <Button icon={`arrowBack`} onClick={pageDown} size={`s`} />
-        <Button label={current} onClick={() => jumpToPage(current)} size={`s`} />
-        <Button label={current + 1} onClick={() => jumpToPage(current + 1)} size={`s`}/>
-        <Button label={current + 2} onClick={() => jumpToPage(current + 2)} size={`s`}/>
-        <Button label={lastPage} onClick={() => jumpToPage(lastPage)} size={`s`}/>
+        <Button label={current} isActive={isActive(current)} onClick={() => jumpToPage(current)} size={`s`} />
+        <Button label={current + 1} isActive={isActive(current + 1)} onClick={() => jumpToPage(current + 1)} size={`s`}/>
+        <Button label={current + 2} isActive={isActive(current + 2)} onClick={() => jumpToPage(current + 2)} size={`s`}/>
+        <Button label={lastPage} isActive={isActive(lastPage)} onClick={() => jumpToPage(lastPage)} size={`s`}/>
         <Button icon={`arrowForward`} onClick={pageUp} size={`s`}/>
       </div>
     </div>
