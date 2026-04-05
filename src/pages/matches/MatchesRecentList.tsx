@@ -2,7 +2,7 @@ import Heading from "@/components/primitive/Heading";
 import Text from "@/components/primitive/Text";
 import MatchTable from "@/components/pages/matches/MatchTable";
 import Paging from "@/components/primitive/Paging";
-import Container from "@/components/primitive/container";
+import Container from "@/components/primitive/Container";
 import styles from "@/styles/pages/matches/matchesRecentList.module.sass";
 import { useMatches } from "@/hooks/useMatches";
 import { usePagination } from "@/hooks/usePagination";
