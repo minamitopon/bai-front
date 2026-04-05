@@ -6,32 +6,60 @@ import styles from "@/styles/components/primitive/paging.module.sass"
 interface Props {
   current: number
   total: number
+  last: number
   pageUp: () => void
   pageDown: () => void
   jumpToPage: (page: number) => void
 }
 
-const Paging = ({ current, total, pageUp, pageDown, jumpToPage }: Props) => {
+const Paging = ({ current, total, last, pageUp, pageDown, jumpToPage }: Props) => {
   const currentPosition = useMemo(() => {
-    return `Showing ${current * 10 - 9} to ${current * 10} of ${total} entries`
+    return `Showing ${current * 10 - 9} to ${Math.min(current * 10, total)} of ${total} entries`
   }, [current, total])
-  const lastPage = useMemo(() => {
-    return Math.ceil(total / 10)
-  }, [total])
-  const isActive = (page: number) => {
+  const isActive = (page: number) => { 
     return current === page
   }
+  const pageNumbers = useMemo(() => {
+    const pages: number[] = []
+    
+    // 1ページ目の時は最大3ページ表示
+    if (current === 1) {
+      for (let i = 0; i < 3; i++) {
+        const page = current + i
+        if (page <= last) {
+          pages.push(page)
+        }
+      }
+    } else if (current === last) {
+      // 最終ページの場合は前3ページを表示
+      for (let i = 0; i < 3; i++) {
+        const page = current - i
+        if (page >= 1) {
+          pages.push(page)
+        }
+      }
+      pages.reverse()
+    } else {
+      // 1ページ目でも最終ページでもない場合は現在ページの前後に1ページずつ表示
+      for (let i = -1; i <= 1; i++) {
+        const page = current + i
+        if (page >= 1 && page <= last) {
+          pages.push(page)
+        }
+      }
+    }
+    return pages
+  }, [current, last])
 
   return (
     <div className={styles['paging']}>
       <Text text={currentPosition} />
       <div className={styles['paging__buttons']}>
-        <Button icon={`arrowBack`} onClick={pageDown} size={`s`} />
-        <Button label={current} isActive={isActive(current)} onClick={() => jumpToPage(current)} size={`s`} />
-        <Button label={current + 1} isActive={isActive(current + 1)} onClick={() => jumpToPage(current + 1)} size={`s`}/>
-        <Button label={current + 2} isActive={isActive(current + 2)} onClick={() => jumpToPage(current + 2)} size={`s`}/>
-        <Button label={lastPage} isActive={isActive(lastPage)} onClick={() => jumpToPage(lastPage)} size={`s`}/>
-        <Button icon={`arrowForward`} onClick={pageUp} size={`s`}/>
+        {current !== 1 && <Button icon={`arrowBack`} onClick={pageDown} size={`s`}/>}
+        {pageNumbers.map(page => {
+          return <Button label={page} isActive={isActive(page)} onClick={() => jumpToPage(page)} size={`s`}/>
+        })}
+        {current !== last && <Button icon={`arrowForward`} onClick={pageUp} size={`s`}/>}
       </div>
     </div>
   )
