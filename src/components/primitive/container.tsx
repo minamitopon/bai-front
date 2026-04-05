@@ -8,7 +8,8 @@ interface Props {
   space?: Space
 }
 
-const Container = ({ children, space }: Props) => {
+const Container = (props: Props) => {
+  const { children, space = 'm' } = props
   const modifireClassObject = useMemo(() => ({
     [styles[`container`]]: true,
     [styles[`container--${space}`]]: !!space,
