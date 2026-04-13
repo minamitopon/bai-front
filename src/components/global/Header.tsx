@@ -12,10 +12,6 @@ const Header = () => {
           <NavLink to="/search" className={ ({ isActive }) => isActive ? styles['header__nav__link--active'] : styles['header__nav__link']}>Search</NavLink>
         </nav>
       </div>
-      <div className={styles['header__right']}>
-        <span></span>
-        <button></button>
-      </div>
     </header>
   )
 }

@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import type { Size, Color, Weight } from "@/types/components"
+import type { Size, Color, Weight, Align } from "@/types/components"
 import generateClassName from "@/functions/components/generateClassName"
 import styles from "@/styles/components/primitive/text.module.sass"
 
@@ -7,17 +7,19 @@ interface Props {
   text: string
   size?: Size
   weight?: Weight,
-  color?: Color
+  color?: Color,
+  align?: Align
 }
 
 const Text = (props: Props) => {
-  const { text, size, weight, color } = props
+  const { text, size, weight, color, align } = props
   const modifireClassObject = useMemo(() => ({
     [styles[`text`]]: true,
     [styles[`text--font-color-${color}`]]: !!color,
     [styles[`text--font-size-${size}`]]: !!size,
     [styles[`text--font-weight-${weight}`]]: !!weight,
-  }), [size, weight, color])
+    [styles[`text--text-align-${align}`]]: !!align,
+  }), [size, weight, color, align])
 
   return (
     <p className={generateClassName(modifireClassObject)}>{text}</p>
