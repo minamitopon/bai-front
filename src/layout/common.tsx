@@ -1,13 +1,16 @@
 import { Outlet } from "react-router";
+import Header from "@/components/global/Header";
+import Footer from "@/components/global/Footer";
 import styles from "@/styles/layout/common.module.sass"
 
 const CommonLayout = () => {
   return (
     <div className={styles['common']}>
-      <div className={styles['common--header']}>Header</div>
+      <Header />
       <main className={styles['common--content']}>
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 };

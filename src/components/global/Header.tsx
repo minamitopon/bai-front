@@ -1,12 +1,17 @@
-import Heading from "@/components/primitive/Heading"
 import { NavLink } from "react-router-dom"
+import Img from "@/components/primitive/Img"
+import Heading from "@/components/primitive/Heading"
 import styles from "@/styles/global/header.module.sass"
+import Logo from "@/assets/svg/header-logo.svg"
 
 const Header = () => {
   return (
     <header className={styles['header']}>
       <div className={styles['header__left']}>
-        <Heading text="Bridge Auction Intelligence" level={1} />
+        <div className={styles['header__logo-wrapper']}>
+          <Img src={Logo} alt="Bridge Auction Intelligence" />
+          <Heading text="Bridge Auction Intelligence" level={1} />
+        </div>
         <nav className={styles['header__nav']}>
           <NavLink to="/" className={ ({ isActive }) => isActive ? styles['header__nav__link--active'] : styles['header__nav__link']}>Recent Matches</NavLink>
           <NavLink to="/search" className={ ({ isActive }) => isActive ? styles['header__nav__link--active'] : styles['header__nav__link']}>Search</NavLink>
