@@ -7,6 +7,13 @@ export type Color =
   | "secondary";
 export type Size = "s" | "m" | "l" | "unlimited";
 export type Weight = "normal" | "bold";
-export type IconName = "filter" | "arrowBack" | "arrowForward";
+export type IconName =
+  | "filter"
+  | "arrowBack"
+  | "arrowForward"
+  | "spade"
+  | "heart"
+  | "diamond"
+  | "club";
 export type Space = "xs" | "s" | "m" | "l" | "xl";
 export type Align = "left" | "center" | "right";
