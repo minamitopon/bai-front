@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { Provider } from "@/components/ui/provider"
 import '@/styles/base/reset.sass'
 import '@/styles/base/variable.sass'
 import '@/styles/base/common.sass'
@@ -18,7 +19,9 @@ async function enableMocking() {
 enableMocking().then(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <Provider forcedTheme="light">
+        <RouterProvider router={router} />
+      </Provider>
     </StrictMode>,
   )
 })
