@@ -14,6 +14,7 @@ export type IconName =
   | "spade"
   | "heart"
   | "diamond"
-  | "club";
+  | "club"
+  | "hint";
 export type Space = "xs" | "s" | "m" | "l" | "xl";
 export type Align = "left" | "center" | "right";
