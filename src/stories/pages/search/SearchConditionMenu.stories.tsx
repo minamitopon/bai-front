@@ -6,7 +6,7 @@ const meta = {
   component: SearchConditionMenu,
   tags: ["autodocs"],
   args: {
-    
+    action: () => { /* NOP */ }
   }
 } satisfies Meta<typeof SearchConditionMenu>
 

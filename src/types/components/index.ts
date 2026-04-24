@@ -4,6 +4,7 @@ export type Color =
   | "diamond"
   | "club"
   | "white"
+  | "primary"
   | "secondary";
 export type Size = "s" | "m" | "l" | "unlimited";
 export type Weight = "normal" | "bold";
