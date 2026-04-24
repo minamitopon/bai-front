@@ -1,0 +1,38 @@
+.search-result-table
+  width: 100%
+  border: 1px solid #E2E8F0
+  th
+    height: 48px
+    text-align: center
+    vertical-align: middle
+    font-weight: $font-weight-bold
+    background-color: #F8FAFC
+    border-bottom: 1px solid #F1F5F9
+    &.search-result-table--header-team-one
+      border-left: solid 4px $color-spade
+    &.search-result-table--header-team-two
+      border-left: solid 4px $color-heart
+  td
+    height: 70px
+    font-size: $font-size-xs
+    text-align: center
+    vertical-align: middle
+    border-bottom: 1px solid #F1F5F9
+    &.search-result-table--data-match-name
+      font-weight: $font-weight-bold
+    &.search-result-table--data-team-one
+      font-weight: $font-weight-bold
+      color: $color-spade
+      border-left: solid 4px $color-spade
+    &.search-result-table--data-team-two
+      font-weight: $font-weight-bold
+      color: $color-heart
+      border-left: solid 4px $color-heart
+    .search-result-table--data-link
+      color: $color-spade
+      font-weight: $font-weight-bold
+
+  .search-result-table-row
+    background-color: $color-white
+    &:hover
+      background-color: #F8FAFC
