@@ -12,8 +12,8 @@ interface Props {
 const Input = (props: Props) => {
   const { value, label, placeholder, size = 'md', icon = null, onChange } = props
   return (
-    <Field.Root>
-      <Field.Label>{label}</Field.Label>
+    <Field.Root css={{ gap: "4px" }}>
+      <Field.Label css={{ color: "#64748B" }}>{label}</Field.Label>
       <InputGroup startElement={icon}>
         <ChakraInput
           value={value}

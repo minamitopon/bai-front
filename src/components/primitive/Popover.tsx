@@ -1,7 +1,11 @@
 import { Popover as ChakraPopover, Portal } from "@chakra-ui/react"
 import Icon from "@/components/primitive/Icon"
 
-const Popover = () => {
+interface Props {
+  children: React.ReactNode
+}
+
+const Popover = ({ children }: Props) => {
   return (
     <ChakraPopover.Root>
       <ChakraPopover.Trigger asChild>
@@ -11,7 +15,7 @@ const Popover = () => {
         <ChakraPopover.Positioner>
           <ChakraPopover.Content>
             <ChakraPopover.Arrow />
-            <ChakraPopover.Body>Some content</ChakraPopover.Body>
+            <ChakraPopover.Body>{children}</ChakraPopover.Body>
           </ChakraPopover.Content>
         </ChakraPopover.Positioner>
       </Portal>
