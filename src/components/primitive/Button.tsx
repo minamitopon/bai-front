@@ -1,11 +1,13 @@
-import { useMemo } from "react"
+import { useMemo, type ReactNode } from "react"
 import Icon from '@/components/primitive/Icon'
 import type { Color, Size, IconName } from "@/types/components"
 import generateClassName from "@/functions/components/generateClassName"
 import styles from "@/styles/components/primitive/button.module.sass"
 
 interface Props {
-  label?: string | number,
+  label?: ReactNode | string,
+  width?: string,
+  height?: string,
   color?: Color,
   size?: Size,
   isActive?: boolean,
@@ -17,7 +19,11 @@ interface Props {
 
 
 const Button = (props: Props) => {
-  const { size = 'm', isActive = false, disabled = false, waiting = false, color = 'white', label, icon, onClick } = props
+  const { width = 'auto', height = 'auto', size = 'm', isActive = false, disabled = false, waiting = false, color = 'white', label, icon, onClick } = props
+  const styleObject = useMemo(() => ({
+    width,
+    height
+  }), [width])
   const modifireClassObject = useMemo(() => ({
     [styles[`button`]]: true,
     [styles[`button--${color}`]]: !!color,
@@ -30,11 +36,16 @@ const Button = (props: Props) => {
   const iconColor = useMemo(() => {
     return color !== 'white' ? 'white' : undefined
   }, [color])
-  
+
+  const handleClick = () => {
+    if (disabled || waiting) return
+    onClick()
+  }
+
   return (
-    <button className={generateClassName(modifireClassObject)} onClick={onClick} disabled={disabled || waiting}>
+    <button className={generateClassName(modifireClassObject)} onClick={handleClick} aria-disabled={disabled || waiting} style={styleObject}>
       {icon && <Icon name={icon} size={size} color={iconColor} />}
-      {label}
+      <span className={styles[`button--label`]}>{label}</span>
     </button>
   )
 }
