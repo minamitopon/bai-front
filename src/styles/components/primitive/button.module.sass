@@ -1,4 +1,5 @@
 .button
+  width: 100%
   border: none
   border-radius: 4px
   cursor: pointer
@@ -9,6 +10,11 @@
   font-weight: 600
   transition: all 0.2s ease
   background-color: $color-white
+  &:hover
+    background-color: $color-background
+  &[aria-disabled="true"]
+    cursor: not-allowed
+    background-color: $color-background-disabled
   &--border
     border: 1px solid $color-text-secondary
   &--spade
@@ -35,7 +41,6 @@
     padding: 4px 8px
     font-size: $font-size-xs
   &--m
-    height: 40px
     padding: 8px 16px
     font-size: $font-size-s
   &--l
@@ -50,7 +55,10 @@
   &.disabled
     opacity: 0.5
     cursor: not-allowed
-
   &.waiting
     opacity: 0.7
     cursor: wait
+
+  .button--label
+    display: flex
+    align-items: center

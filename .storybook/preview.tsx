@@ -1,6 +1,7 @@
+import React from 'react'
 import type { Preview } from '@storybook/react-vite'
 import { MemoryRouter } from 'react-router-dom'
-import React from 'react'
+import { Provider } from '../src/components/ui/provider'
 
 const preview: Preview = {
   parameters: {
@@ -20,9 +21,11 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <MemoryRouter>
-        <Story />
-      </MemoryRouter>
+      <Provider forcedTheme="light">
+        <MemoryRouter>
+          <Story />
+        </MemoryRouter>
+      </Provider>
     ),
   ],
 };
