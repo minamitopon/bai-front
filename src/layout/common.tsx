@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
-import Header from "@/components/global/Header";
-import Footer from "@/components/global/Footer";
+import Header from "@/components/global/Header/Header";
+import Footer from "@/components/global/Footer/Footer";
 import styles from "@/styles/layout/common.module.sass"
 
 const CommonLayout = () => {

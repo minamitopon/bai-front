@@ -1,8 +1,8 @@
-import Heading from "@/components/primitive/Heading";
-import Text from "@/components/primitive/Text";
-import MatchTable from "@/components/pages/matches/MatchTable";
-import Paging from "@/components/primitive/Paging";
-import Container from "@/components/primitive/Container";
+import Heading from "@/components/primitive/Heading/Heading";
+import Text from "@/components/primitive/Text/Text";
+import MatchTable from "@/components/pages/matches/MatchTable/MatchTable";
+import Paging from "@/components/primitive/Paging/Paging";
+import Container from "@/components/primitive/Container/Container";
 import styles from "@/styles/pages/matches/matchesRecentList.module.sass";
 import { useMatches } from "@/hooks/useMatches";
 import { usePagination } from "@/hooks/usePagination";
