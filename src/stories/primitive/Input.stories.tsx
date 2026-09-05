@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from "@storybook/react";
-import Input from "@/components/primitive/Input";
-import Icon from "@/components/primitive/Icon"
+import Input from "@/components/primitive/Input/Input";
+import Icon from "@/components/primitive/Icon/Icon"
 
 const meta = {
   title: "Primitive/Input",

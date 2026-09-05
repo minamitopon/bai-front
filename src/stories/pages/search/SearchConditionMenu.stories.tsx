@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import SearchConditionMenu from "@/components/pages/search/SearchConditionMenu"
+import SearchConditionMenu from "@/components/pages/search/SearchConditionMenu/SearchConditionMenu"
 
 const meta = {
   title: "Pages/Search/SearchConditionMenu",

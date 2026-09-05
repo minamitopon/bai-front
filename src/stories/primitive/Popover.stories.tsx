@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import Popover from "@/components/primitive/Popover"
+import Popover from "@/components/primitive/Popover/Popover"
 
 const meta = {
   title: "Primitive/Popover",
@@ -12,4 +12,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+  args: {
+    children: "Popover content",
+  },
 }
