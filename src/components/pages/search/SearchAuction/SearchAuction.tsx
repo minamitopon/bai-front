@@ -1,19 +1,23 @@
-import { useState } from 'react'
 import Heading from '@/components/primitive/Heading/Heading'
 import Bidding from '@/components/primitive/Bidding/Bidding'
 import Auction from '@/components/primitive/Auction/Auction'
 import styles from '@/components/pages/search/SearchAuction/searchAuction.module.sass'
 import type { Call } from '@/types/components'
 
-const SearchAuction = () => {
-  const [auctionSequence, setAuctionSequence] = useState<Call[]>([])
+interface Props {
+  auctionSequence: Call[]
+  onAuctionSequenceChange: (auctionSequence: Call[]) => void
+}
 
+const SearchAuction = ({ auctionSequence, onAuctionSequenceChange }: Props) => {
   const handleUpdateAuction = (call: Call) => {
-    setAuctionSequence((currentAuction) => [...currentAuction, call])
+    const nextAuctionSequence = [...auctionSequence, call]
+    onAuctionSequenceChange(nextAuctionSequence)
   }
 
   const handleUndo = () => {
-    setAuctionSequence((currentAuction) => currentAuction.slice(0, -1))
+    const nextAuctionSequence = auctionSequence.slice(0, -1)
+    onAuctionSequenceChange(nextAuctionSequence)
   }
 
   return (

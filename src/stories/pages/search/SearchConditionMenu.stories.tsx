@@ -6,7 +6,14 @@ const meta = {
   component: SearchConditionMenu,
   tags: ["autodocs"],
   args: {
-    action: () => { /* NOP */ }
+    conditions: {
+      playerName: "",
+      teamName: "",
+      matchEventName: "",
+      hands: { spade: "", heart: "", diamond: "", club: "" },
+      auction: [],
+    },
+    updateConditions: () => {},
   }
 } satisfies Meta<typeof SearchConditionMenu>
 
@@ -15,4 +22,14 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+  args: {
+    conditions: {
+      playerName: "",
+      teamName: "",
+      matchEventName: "",
+      hands: { spade: "", heart: "", diamond: "", club: "" },
+      auction: [],
+    },
+    updateConditions: () => {},
+  },
 }
