@@ -55,7 +55,7 @@ const Bidding = (props: Props) => {
     { id: -2, rank: 0, suit: CALL_OPTION.DOUBLE },
     { id: -3, rank: 0, suit: CALL_OPTION.REDOUBLE }
   ]
-  const lastBidId = auction.length > 0 ? auction.sort((a, b) => b.id - a.id)[0].id : -1
+  const lastBidId = auction.length > 0 ? [...auction].sort((a, b) => b.id - a.id)[0].id : -1
   const lastCall = auction.length > 0 ? auction.at(-1)?.suit : -1
   const isRedoubleCallable = auction.length > 0 && lastCall == CALL_OPTION.DOUBLE
   const isDoubleCallable = auction.length > 0 && lastBidId > -1 && lastCall !== CALL_OPTION.REDOUBLE && lastCall !== CALL_OPTION.DOUBLE
