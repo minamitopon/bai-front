@@ -27,6 +27,11 @@ const SearchResultTable = ({ results }: Props) => {
         </tr>
       </thead>
       <tbody>
+        {results.length === 0 && (
+          <tr>
+            <td colSpan={8} className={styles['search-result-table--no-results']}>No results found</td>
+          </tr>
+        )}
         {results.map((result) => (
           <tr key={result.match.id} className={styles['search-result-table-row']}>
             <td>{result.match.date}</td>
