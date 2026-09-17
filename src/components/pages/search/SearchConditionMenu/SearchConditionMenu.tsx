@@ -10,10 +10,10 @@ import type { SearchCondition } from "@/interfaces/pages/search"
 
 interface Props {
   conditions: SearchCondition
-  updateConditions: (newConditions: SearchCondition) => void
+  onSearch: (newConditions: SearchCondition) => void
 }
 
-const SearchConditionMenu = ({ conditions, updateConditions }: Props) => {
+const SearchConditionMenu = ({ conditions, onSearch }: Props) => {
   const [tmpConditions, setTmpConditions] = useState<SearchCondition>(conditions)
 
   const updateTmpConditions = (key: keyof SearchCondition, value: string) => {
@@ -52,7 +52,7 @@ const SearchConditionMenu = ({ conditions, updateConditions }: Props) => {
         <Input icon={<Icon name="club" color="club" />} value={tmpConditions.hands.club} placeholder="Ax" onChange={(value) => { updateHandsConditions("club", value) }} />
       </div>
       <div className={styles['search-condition-menu__buttons']}>
-        <Button label="Search" color="spade" onClick={() => updateConditions(tmpConditions)} />
+        <Button label="Search" color="spade" onClick={() => onSearch(tmpConditions)} />
         <Button label="Clear" onClick={clearTmpConditions} />
       </div>
     </div>
