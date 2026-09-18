@@ -1,7 +1,9 @@
 import { createBrowserRouter } from "react-router";
 import MatchesRecentList from "@/pages/matches/MatchesRecentList.tsx";
+import Search from "@/pages/search/Search";
 import CommonLayout from "@/layout/common.tsx";
-import DataCenter from "@/components/pages/matches/DataCenter";
+import MatchesDataCenter from "@/components/pages/matches/DataCenter";
+import SearchDataCenter from "@/components/pages/search/DataCenter";
 
 const router = createBrowserRouter([
   {
@@ -11,13 +13,27 @@ const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <DataCenter>
+          <MatchesDataCenter>
             <MatchesRecentList />
-          </DataCenter>
+          </MatchesDataCenter>
         ),
       },
     ],
   },
+  {
+    path: "/search",
+    element: <CommonLayout />,
+    children: [
+      {
+        index: true,
+        element: (
+          <SearchDataCenter>
+            <Search />
+          </SearchDataCenter>
+        ),
+      },
+    ],
+  }
 ]);
 
 export default router;
