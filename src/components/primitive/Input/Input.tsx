@@ -1,4 +1,5 @@
 import { Input as ChakraInput, InputGroup, Field } from "@chakra-ui/react"
+import styles from "@/components/primitive/Input/input.module.sass"
 
 interface Props {
   value: string
@@ -19,6 +20,7 @@ const Input = (props: Props) => {
           value={value}
           placeholder={placeholder}
           size={size}
+          className={`${styles.input} ${icon ? styles['input--with-icon'] : ''}`}
           onChange={(e) => onChange(e.target.value)}
         />
       </InputGroup>

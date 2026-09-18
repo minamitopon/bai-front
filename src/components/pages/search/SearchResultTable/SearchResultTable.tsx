@@ -1,11 +1,9 @@
 import styles from '@/components/pages/search/SearchResultTable/searchResultTable.module.sass'
+import { useSearch } from "@/contexts/SearchContext";
 
-interface Props {
-  results: any[]
-}
-
-const SearchResultTable = ({ results }: Props) => {
+const SearchResultTable = () => {
   const cols = ['96px', 'auto', '120px', '120px', '144px', '144px', '96px']
+  const { results } = useSearch();
 
   return (
     <table className={styles['search-result-table']}>
@@ -27,6 +25,11 @@ const SearchResultTable = ({ results }: Props) => {
         </tr>
       </thead>
       <tbody>
+        {results.length === 0 && (
+          <tr className={styles['search-result-table-row']}>
+            <td colSpan={8} className={styles['search-result-table--no-results']}>No results found</td>
+          </tr>
+        )}
         {results.map((result) => (
           <tr key={result.match.id} className={styles['search-result-table-row']}>
             <td>{result.match.date}</td>
@@ -41,7 +44,7 @@ const SearchResultTable = ({ results }: Props) => {
               <span>{result.players.north_close} - {result.players.south_close}</span><br />
               <span>{result.players.east_close} - {result.players.west_close}</span>
             </td>
-            <td># {result.board_number}</td>
+            <td>#</td>
             <td>
               <a href="#" className={styles['search-result-table--data-link']}>View</a>
             </td>

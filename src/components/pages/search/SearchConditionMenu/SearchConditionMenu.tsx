@@ -6,45 +6,34 @@ import Button from "@/components/primitive/Button/Button"
 import Text from "@/components/primitive/Text/Text"
 import styles from "@/components/pages/search/SearchConditionMenu/searchConditionMenu.module.sass"
 import { useState } from "react"
-
-interface SearchCondition {
-  playerName: string
-  teamName: string
-  matchEventName: string
-  hands: {
-    spade: string
-    heart: string
-    diamond: string
-    club: string
-  }
-}
+import type { SearchCondition } from "@/interfaces/pages/search"
 
 interface Props {
-  action: () => void;
+  conditions: SearchCondition
+  onSearch: (newConditions: SearchCondition) => void
 }
 
-const SearchConditionMenu = ({ action }: Props) => {
-  const initialConditions: SearchCondition = { playerName: "", teamName: "", matchEventName: "", hands: { spade: "", heart: "", diamond: "", club: "" } }
-  const [conditions, setConditions] = useState<SearchCondition>(initialConditions)
+const SearchConditionMenu = ({ conditions, onSearch }: Props) => {
+  const [tmpConditions, setTmpConditions] = useState<SearchCondition>(conditions)
 
-  const updateConditions = (key: keyof SearchCondition, value: string) => {
-    setConditions(prev => ({ ...prev, [key]: value }))
+  const updateTmpConditions = (key: keyof SearchCondition, value: string) => {
+    setTmpConditions(prev => ({ ...prev, [key]: value }))
   }
   const updateHandsConditions = (suit: keyof SearchCondition['hands'], value: string) => {
-    setConditions(prev => ({ ...prev, hands: { ...prev.hands, [suit]: value } }))
+    setTmpConditions(prev => ({ ...prev, hands: { ...prev.hands, [suit]: value } }))
   }
 
-  const clearConditions = () => {
-    setConditions(initialConditions)
+  const clearTmpConditions = () => {
+    setTmpConditions(conditions)
   }
 
   return (
     <div className={styles['search-condition-menu']}>
       <div className={styles['search-condition-menu__search-queries']}>
         <Heading text="Search Queries" level={2} color="secondary" />
-        <Input label="Player Name" value={conditions.playerName} placeholder="e.g. Helgemo" onChange={(value) => { updateConditions("playerName", value) }} />
-        <Input label="Team Name" value={conditions.teamName} placeholder="e.g. Nickell" onChange={(value) => { updateConditions("teamName", value) }} />
-        <Input label="Match/Event Name" value={conditions.matchEventName} placeholder="e.g. Bermuda Bowl" onChange={(value) => { updateConditions("matchEventName", value) }} />
+        <Input label="Player Name" value={tmpConditions.playerName} placeholder="e.g. Helgemo" onChange={(value) => { updateTmpConditions("playerName", value) }} />
+        <Input label="Team Name" value={tmpConditions.teamName} placeholder="e.g. Nickell" onChange={(value) => { updateTmpConditions("teamName", value) }} />
+        <Input label="Match/Event Name" value={tmpConditions.matchEventName} placeholder="e.g. Bermuda Bowl" onChange={(value) => { updateTmpConditions("matchEventName", value) }} />
       </div>
       <div className={styles['search-condition-menu__hand-search']}>
         <span className={styles['search-condition-menu__hand-search-heading']}>
@@ -57,14 +46,14 @@ const SearchConditionMenu = ({ action }: Props) => {
             </div>
           </Popover>
         </span>
-        <Input icon={<Icon name="spade" color="spade" />} value={conditions.hands.spade} placeholder="AK863" onChange={(value) => { updateHandsConditions("spade", value) }} />
-        <Input icon={<Icon name="heart" color="heart" />} value={conditions.hands.heart} placeholder="KQxx" onChange={(value) => { updateHandsConditions("heart", value) }} />
-        <Input icon={<Icon name="diamond" color="diamond" />} value={conditions.hands.diamond} placeholder="xxx" onChange={(value) => { updateHandsConditions("diamond", value) }} />
-        <Input icon={<Icon name="club" color="club" />} value={conditions.hands.club} placeholder="Ax" onChange={(value) => { updateHandsConditions("club", value) }} />
+        <Input icon={<Icon name="spade" color="spade" />} value={tmpConditions.hands.spade} placeholder="AK863" onChange={(value) => { updateHandsConditions("spade", value) }} />
+        <Input icon={<Icon name="heart" color="heart" />} value={tmpConditions.hands.heart} placeholder="KQxx" onChange={(value) => { updateHandsConditions("heart", value) }} />
+        <Input icon={<Icon name="diamond" color="diamond" />} value={tmpConditions.hands.diamond} placeholder="xxx" onChange={(value) => { updateHandsConditions("diamond", value) }} />
+        <Input icon={<Icon name="club" color="club" />} value={tmpConditions.hands.club} placeholder="Ax" onChange={(value) => { updateHandsConditions("club", value) }} />
       </div>
       <div className={styles['search-condition-menu__buttons']}>
-        <Button label="Search" color="spade" onClick={action} />
-        <Button label="Clear" onClick={clearConditions} />
+        <Button label="Search" width="stretch" color="spade" onClick={() => onSearch(tmpConditions)} />
+        <Button label="Clear" width="stretch" onClick={clearTmpConditions} />
       </div>
     </div>
   )
