@@ -2,7 +2,7 @@ import styles from '@/components/pages/search/SearchResultTable/searchResultTabl
 import { useSearch } from "@/contexts/SearchContext";
 
 const SearchResultTable = () => {
-  const cols = ['96px', '196px', '120px', '120px', '144px', '144px', '96px']
+  const cols = ['96px', 'auto', '120px', '120px', '144px', '144px', '96px']
   const { results } = useSearch();
 
   return (

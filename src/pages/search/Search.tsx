@@ -52,8 +52,8 @@ const Search = () => {
           <SearchResultTable />
         </div>
       </div>
-      <div className={styles['search__history']}>
-      </div>
+      {/* <div className={styles['search__history']}>
+      </div> */}
     </div>
   )
 }
