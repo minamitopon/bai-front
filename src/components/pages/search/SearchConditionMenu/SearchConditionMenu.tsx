@@ -52,8 +52,8 @@ const SearchConditionMenu = ({ conditions, onSearch }: Props) => {
         <Input icon={<Icon name="club" color="club" />} value={tmpConditions.hands.club} placeholder="Ax" onChange={(value) => { updateHandsConditions("club", value) }} />
       </div>
       <div className={styles['search-condition-menu__buttons']}>
-        <Button label="Search" color="spade" onClick={() => onSearch(tmpConditions)} />
-        <Button label="Clear" onClick={clearTmpConditions} />
+        <Button label="Search" width="stretch" color="spade" onClick={() => onSearch(tmpConditions)} />
+        <Button label="Clear" width="stretch" onClick={clearTmpConditions} />
       </div>
     </div>
   )

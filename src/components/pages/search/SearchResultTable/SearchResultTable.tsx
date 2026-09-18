@@ -1,11 +1,9 @@
 import styles from '@/components/pages/search/SearchResultTable/searchResultTable.module.sass'
+import { useSearch } from "@/contexts/SearchContext";
 
-interface Props {
-  results: any[]
-}
-
-const SearchResultTable = ({ results }: Props) => {
-  const cols = ['96px', 'auto', '120px', '120px', '144px', '144px', '96px']
+const SearchResultTable = () => {
+  const cols = ['96px', '196px', '120px', '120px', '144px', '144px', '96px']
+  const { results } = useSearch();
 
   return (
     <table className={styles['search-result-table']}>
@@ -28,7 +26,7 @@ const SearchResultTable = ({ results }: Props) => {
       </thead>
       <tbody>
         {results.length === 0 && (
-          <tr>
+          <tr className={styles['search-result-table-row']}>
             <td colSpan={8} className={styles['search-result-table--no-results']}>No results found</td>
           </tr>
         )}
@@ -46,7 +44,7 @@ const SearchResultTable = ({ results }: Props) => {
               <span>{result.players.north_close} - {result.players.south_close}</span><br />
               <span>{result.players.east_close} - {result.players.west_close}</span>
             </td>
-            <td># {result.board_number}</td>
+            <td>#</td>
             <td>
               <a href="#" className={styles['search-result-table--data-link']}>View</a>
             </td>

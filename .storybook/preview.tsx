@@ -2,6 +2,7 @@ import React from 'react'
 import type { Preview } from '@storybook/react-vite'
 import { MemoryRouter } from 'react-router-dom'
 import { Provider } from '../src/components/ui/provider'
+import SearchDataCenter from '../src/components/pages/search/DataCenter'
 
 const preview: Preview = {
   parameters: {
@@ -23,7 +24,9 @@ const preview: Preview = {
     (Story) => (
       <Provider forcedTheme="light">
         <MemoryRouter>
-          <Story />
+          <SearchDataCenter>
+            <Story />
+          </SearchDataCenter>
         </MemoryRouter>
       </Provider>
     ),

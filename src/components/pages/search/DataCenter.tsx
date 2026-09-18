@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react"
 import type { SearchCondition } from "@/interfaces/pages/search"
 import { SearchContext } from "@/contexts/SearchContext"
+import type { SearchResult } from "@/interfaces/pages/search"
 
 interface Props {
   children: ReactNode
@@ -21,20 +22,23 @@ const initialCondition: SearchCondition = {
 
 const DataCenter = ({ children }: Props) => {
   const [condition, setCondition] = useState<SearchCondition>(initialCondition)
-  const [results, setResults] = useState<any[]>([])
+  const [results, setResults] = useState<SearchResult[]>([])
 
-  const findByCondition = (condition: SearchCondition) => {
-    fetch('/api/search', {
+  const findByCondition = async (condition: SearchCondition) => {
+    const res = await fetch('/api/search', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(condition)
     })
-      .then(res => res.json())
-      .then(data => {
-        setResults(data)
-      })
+    if (res.ok) {
+      const data: SearchResult[] = await res.json()
+      setCondition(condition)
+      setResults(data)
+    } else {
+      throw new Error('fetch error')
+    }
   }
 
   return (

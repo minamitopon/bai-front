@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Container from "@/components/primitive/Container/Container";
 import Heading from "@/components/primitive/Heading/Heading";
 import SearchConditionMenu from "@/components/pages/search/SearchConditionMenu/SearchConditionMenu";
@@ -10,46 +10,38 @@ import { SearchContext } from "@/contexts/SearchContext";
 
 const Search = () => {
   const context = useContext(SearchContext);
-  const [conditions, setConditions] = useState<SearchCondition>({
-    playerName: "",
-    teamName: "",
-    matchEventName: "",
-    hands: {
-      spade: "",
-      heart: "",
-      diamond: "",
-      club: ""
-    },
-    auction: []
-  })
+  if (!context) {
+    throw new Error("Search must be used within a Search DataCenter")
+  }
+
+  const { condition, setCondition, findByCondition } = context
 
   const handleSearch = async (newConditions: SearchCondition) => {
     // auctionの条件はSearchAuctionから更新されるため、ここで最新の情報とマージする
     const updatedConditions: SearchCondition = {
       ...newConditions,
-      auction: conditions.auction,
+      auction: condition.auction,
     }
 
-    setConditions(updatedConditions)
-    context?.findByCondition(updatedConditions)
+    await findByCondition(updatedConditions)
   }
 
   const handleUpdateAuction = (auction: SearchCondition['auction']) => {
-    setConditions((currentConditions) => ({
-      ...currentConditions,
+    setCondition({
+      ...condition,
       auction,
-    }))
+    })
   }
 
   return (
     <div className={styles['search']}>
       <div className={styles['search__side-menu']}>
-        <SearchConditionMenu conditions={conditions} onSearch={handleSearch} />
+        <SearchConditionMenu conditions={condition} onSearch={handleSearch} />
       </div>
       <div className={styles['search__main']}>
         <Container space="xl">
           <SearchAuction
-            auctionSequence={conditions.auction || []}
+            auctionSequence={condition.auction || []}
             onAuctionSequenceChange={handleUpdateAuction}
           />
         </Container>
@@ -57,7 +49,7 @@ const Search = () => {
           <Container space="l">
             <Heading text="Search Results" level={1} />
           </Container>
-          <SearchResultTable results={[]} />
+          <SearchResultTable />
         </div>
       </div>
       <div className={styles['search__history']}>
