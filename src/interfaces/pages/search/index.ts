@@ -1,13 +1,15 @@
+export interface Hand {
+  spade: string
+  heart: string
+  diamond: string
+  club: string
+}
+
 export interface SearchCondition {
   playerName: string
   teamName: string
   matchEventName: string
-  hands: {
-    spade: string
-    heart: string
-    diamond: string
-    club: string
-  },
+  hands: Hand,
   auction: Array<any>
 }
 
