@@ -21,6 +21,7 @@ export type IconName =
   | "hint";
 export type Space = "xs" | "s" | "m" | "l" | "xl";
 export type Align = "left" | "center" | "right";
+export type Direction = "north" | "east" | "south" | "west";
 
 export type Call = {
   id: number;
