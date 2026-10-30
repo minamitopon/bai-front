@@ -30,3 +30,5 @@ export type Call = {
     | (typeof SUIT)[keyof typeof SUIT]
     | (typeof CALL_OPTION)[keyof typeof CALL_OPTION];
 };
+
+export type Suit = "s" | "h" | "d" | "c" | "n";
