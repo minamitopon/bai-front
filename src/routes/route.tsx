@@ -4,6 +4,7 @@ import Search from "@/pages/search/Search";
 import CommonLayout from "@/layout/common.tsx";
 import MatchesDataCenter from "@/components/pages/matches/DataCenter";
 import SearchDataCenter from "@/components/pages/search/DataCenter";
+import Board from "@/pages/board/Board";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,16 @@ const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/board/:uuid/:boardNumber",
+    element: <CommonLayout />,
+    children: [
+      {
+        index: true,
+        element: <Board />,
+      },
+    ]
   }
 ]);
 
