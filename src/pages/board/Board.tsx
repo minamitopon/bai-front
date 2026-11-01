@@ -4,6 +4,7 @@ import Button from "@/components/primitive/Button/Button";
 import BoardHands from "@/components/pages/board/BoardHands/BoardHands";
 import BoardPlayHistory from "@/components/pages/board/BoardPlayHistory/BoardPlayHistory";
 import BoardAuction from "@/components/pages/board/BoardAuction/BoardAuction";
+import BoardAnalysis from "@/components/pages/board/BoardAnalysis/BoardAnalysis";
 import { useBoardContext } from "@/contexts/BoardContext";
 import type { Board as BoardData } from "@/interfaces/pages/board";
 import type { Hand } from "@/interfaces/pages/search";
@@ -21,6 +22,12 @@ const Board = () => {
   const { board, find } = useBoardContext();
 
   const parsedBoardNumber = Number(boardNumber);
+  const persedHands = board ? [
+    toHand(board, "north"),
+    toHand(board, "east"),
+    toHand(board, "south"),
+    toHand(board, "west"),
+  ] : []
 
   useEffect(() => {
     if (uuid && Number.isInteger(parsedBoardNumber) && parsedBoardNumber > 0) {
@@ -54,12 +61,7 @@ const Board = () => {
     <div className={styles["board"]}>
       <div className={styles["board-left"]}>
         <BoardHands
-          hands={board ? [
-            toHand(board, "north"),
-            toHand(board, "east"),
-            toHand(board, "south"),
-            toHand(board, "west"),
-          ] : []}
+          hands={persedHands}
         />
         <BoardPlayHistory playLog={mockPlayLog} />
       </div>
@@ -74,6 +76,7 @@ const Board = () => {
           boardNumber={parsedBoardNumber}
           auction={mockAuction}
         />
+        <BoardAnalysis hands={persedHands} />
       </div>
     </div>
   );
