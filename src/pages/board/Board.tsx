@@ -6,6 +6,7 @@ import { useBoardContext } from "@/contexts/BoardContext";
 import type { Board as BoardData } from "@/interfaces/pages/board";
 import type { Hand } from "@/interfaces/pages/search";
 import styles from "@/pages/board/board.module.sass";
+import Button from "@/components/primitive/Button/Button";
 
 const toHand = (board: BoardData, direction: "north" | "east" | "south" | "west"): Hand => ({
   spade: board[`${direction}_spade`],
@@ -24,6 +25,10 @@ const Board = () => {
       void find(uuid, parsedBoardNumber);
     }
   }, [uuid, boardNumber, find]);
+
+  const handleBack = () => {
+    window.history.back();
+  }
 
   const mockPlayLog = [
       ["hJ", "h2", "h4", "hA"],
@@ -54,7 +59,14 @@ const Board = () => {
         />
         <BoardPlayHistory playLog={mockPlayLog} />
       </div>
-      <div className={styles["board-right"]}></div>
+      <div className={styles["board-right"]}>
+        <Button
+          label="Back to List"
+          width="100%"
+          icon="arrowBack"
+          onClick={handleBack}
+        />
+      </div>
     </div>
   );
 };
