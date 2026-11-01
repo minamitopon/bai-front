@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useParams } from "react-router";
+import Button from "@/components/primitive/Button/Button";
 import BoardHands from "@/components/pages/board/BoardHands/BoardHands";
 import BoardPlayHistory from "@/components/pages/board/BoardPlayHistory/BoardPlayHistory";
+import BoardAuction from "@/components/pages/board/BoardAuction/BoardAuction";
 import { useBoardContext } from "@/contexts/BoardContext";
 import type { Board as BoardData } from "@/interfaces/pages/board";
 import type { Hand } from "@/interfaces/pages/search";
 import styles from "@/pages/board/board.module.sass";
-import Button from "@/components/primitive/Button/Button";
 
 const toHand = (board: BoardData, direction: "north" | "east" | "south" | "west"): Hand => ({
   spade: board[`${direction}_spade`],
@@ -19,8 +20,9 @@ const Board = () => {
   const { uuid, boardNumber } = useParams();
   const { board, find } = useBoardContext();
 
+  const parsedBoardNumber = Number(boardNumber);
+
   useEffect(() => {
-    const parsedBoardNumber = Number(boardNumber);
     if (uuid && Number.isInteger(parsedBoardNumber) && parsedBoardNumber > 0) {
       void find(uuid, parsedBoardNumber);
     }
@@ -45,6 +47,8 @@ const Board = () => {
       ["d6", "dT", "dA", "d7"],
       ["d8", "c8", "h5", "h8"],
     ]
+  
+  const mockAuction = "2D! p 2N! p 3C! p 3D! d 3S! p 4H p p p"
 
   return (
     <div className={styles["board"]}>
@@ -65,6 +69,10 @@ const Board = () => {
           width="100%"
           icon="arrowBack"
           onClick={handleBack}
+        />
+        <BoardAuction
+          boardNumber={parsedBoardNumber}
+          auction={mockAuction}
         />
       </div>
     </div>
