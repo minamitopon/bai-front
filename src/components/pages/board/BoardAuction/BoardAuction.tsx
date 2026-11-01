@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import styles from "@/components/pages/board/BoardAuction/boardAuction.module.sass";
 import Heading from "@/components/primitive/Heading/Heading";
 import Icon from "@/components/primitive/Icon/Icon";
-import type { IconName } from "@/types/components";
+import type { Color } from "@/types/components";
 
 interface Props {
   boardNumber: number;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const directions = ["W", "N", "E", "S"] as const;
-const suitIcons: Partial<Record<string, IconName>> = {
+const suitIcons: Partial<Record<string, Extract<Color, "spade" | "heart" | "diamond" | "club">>> = {
   s: "spade",
   h: "heart",
   d: "diamond",
@@ -62,7 +62,7 @@ const renderCall = (call: string): ReactNode => {
   return (
     <span className={styles["board-auction__contract"]}>
       <span>{contract[1]}</span>
-      {suitIcon ? <Icon name={suitIcon} size="l" /> : <span>NT</span>}
+      {suitIcon ? <Icon name={suitIcon} size="l" color={suitIcon} /> : <span>NT</span>}
     </span>
   );
 };

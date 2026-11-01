@@ -34,7 +34,7 @@ const SuitValue = (props: Props) => {
   return (
     <div className={generateClassName(modifireClassObject())}>
       <span>{value}</span>
-      <span><Icon name={suitIcon} size="m" /></span>
+      <span><Icon name={suitIcon} size="m" color={suitIcon || undefined} /></span>
     </div>
   );
 };
