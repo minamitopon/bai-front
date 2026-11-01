@@ -1,10 +1,13 @@
 import { createContext, useContext } from "react"
-import type { Board } from "@/interfaces/pages/board"
+import type { Board, Playlog } from "@/interfaces/pages/board"
 
 export interface BoardContextType {
   board: Board | null
   setBoard: (board: Board | null) => void
-  find: (uuid: string, boardNumber: number) => Promise<void>
+  findBoard: (uuid: string, boardNumber: number) => Promise<void>
+  playlogs: Playlog[]
+  setPlaylogs: (playlogs: Playlog[]) => void
+  findPlaylogs: (uuid: string, boardNumber: number) => Promise<void>
 }
 
 export const BoardContext = createContext<BoardContextType | undefined>(undefined)

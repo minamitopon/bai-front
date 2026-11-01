@@ -4,6 +4,8 @@ import { matches } from "@/mocks/api/matches/get"
 import type { SearchCondition } from "@/interfaces/pages/search"
 
 import { hands } from "@/mocks/api/hand/get"
+import { playlogs } from "@/mocks/api/playlogs/get"
+
 
 export const handlers = [
   http.get('/api/user', () => {
@@ -48,5 +50,11 @@ export const handlers = [
     const { uuid, boardNumber } = params;
     const hand = hands.find(h => h.uuid === uuid && h.board === Number(boardNumber))
     return HttpResponse.json(hand)
+  }),
+
+  http.get('/api/playlogs/:uuid/:boardNumber', ({ params }) => {
+    const { uuid, boardNumber } = params;
+    const matchedPlaylogs = playlogs.filter(p => p.uuid === uuid && p.board_number === boardNumber)
+    return HttpResponse.json(matchedPlaylogs)
   })
 ];

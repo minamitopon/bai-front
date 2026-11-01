@@ -6,7 +6,7 @@ import type { Color } from "@/types/components";
 
 interface Props {
   boardNumber: number;
-  auction: string;
+  auctions: { room: string; auction: string }[];
 }
 
 const directions = ["W", "N", "E", "S"] as const;
@@ -67,8 +67,8 @@ const renderCall = (call: string): ReactNode => {
   );
 };
 
-const BoardAuction = ({ boardNumber, auction }: Props) => {
-  const rows = createAuctionRows(boardNumber, auction);
+const BoardAuction = ({ boardNumber, auctions }: Props) => {
+  const rows = createAuctionRows(boardNumber, auctions[0]?.auction ?? "");
 
   return (
     <div className={styles["board-auction"]}>

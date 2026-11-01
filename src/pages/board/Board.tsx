@@ -19,7 +19,7 @@ const toHand = (board: BoardData, direction: "north" | "east" | "south" | "west"
 
 const Board = () => {
   const { uuid, boardNumber } = useParams();
-  const { board, find } = useBoardContext();
+  const { board, playlogs, findBoard, findPlaylogs } = useBoardContext();
 
   const parsedBoardNumber = Number(boardNumber);
   const persedHands = board ? [
@@ -31,31 +31,34 @@ const Board = () => {
 
   useEffect(() => {
     if (uuid && Number.isInteger(parsedBoardNumber) && parsedBoardNumber > 0) {
-      void find(uuid, parsedBoardNumber);
+      void findBoard(uuid, parsedBoardNumber);
+      void findPlaylogs(uuid, parsedBoardNumber);
     }
-  }, [uuid, boardNumber, find]);
+  }, [uuid, parsedBoardNumber, findBoard, findPlaylogs]);
 
   const handleBack = () => {
     window.history.back();
   }
 
-  const mockPlayLog = [
-      ["hJ", "h2", "h4", "hA"],
-      ["sK", "s4", "s3", "sA"],
-      ["c9", "cA", "c3", "c2"],
-      ["s9", "s8", "s2", "s7"],
-      ["s5", "c6", "sJ", "s6"],
-      ["hK", "h6", "c5", "h9"],
-      ["hQ", "h7", "cJ", "hT"],
-      ["d5", "d9", "dJ", "dK"],
-      ["cK", "cQ", "c4", "sT"],
-      ["sQ", "cT", "h3", "c7"],
-      ["d2", "d4", "dQ", "d3"],
-      ["d6", "dT", "dA", "d7"],
-      ["d8", "c8", "h5", "h8"],
-    ]
+  // const mockPlayLog = [
+  //     ["hJ", "h2", "h4", "hA"],
+  //     ["sK", "s4", "s3", "sA"],
+  //     ["c9", "cA", "c3", "c2"],
+  //     ["s9", "s8", "s2", "s7"],
+  //     ["s5", "c6", "sJ", "s6"],
+  //     ["hK", "h6", "c5", "h9"],
+  //     ["hQ", "h7", "cJ", "hT"],
+  //     ["d5", "d9", "dJ", "dK"],
+  //     ["cK", "cQ", "c4", "sT"],
+  //     ["sQ", "cT", "h3", "c7"],
+  //     ["d2", "d4", "dQ", "d3"],
+  //     ["d6", "dT", "dA", "d7"],
+  //     ["d8", "c8", "h5", "h8"],
+  //   ]
   
-  const mockAuction = "2D! p 2N! p 3C! p 3D! d 3S! p 4H p p p"
+  // const mockAuction = "2D! p 2N! p 3C! p 3D! d 3S! p 4H p p p"
+  const auctions = playlogs.map(({ room, auction }) => ({ room, auction }))
+  const playlogsData = playlogs.map(({ room, play }) => ({ room, play }))
 
   return (
     <div className={styles["board"]}>
@@ -63,7 +66,7 @@ const Board = () => {
         <BoardHands
           hands={persedHands}
         />
-        <BoardPlayHistory playLog={mockPlayLog} />
+        <BoardPlayHistory playLogs={playlogsData} />
       </div>
       <div className={styles["board-right"]}>
         <Button
@@ -74,7 +77,7 @@ const Board = () => {
         />
         <BoardAuction
           boardNumber={parsedBoardNumber}
-          auction={mockAuction}
+          auctions={auctions}
         />
         <BoardAnalysis hands={persedHands} />
       </div>

@@ -1,5 +1,5 @@
 import { useCallback, useState, type ReactNode } from "react"
-import type { Board } from "@/interfaces/pages/board"
+import type { Board, Playlog } from "@/interfaces/pages/board"
 import { BoardContext } from "@/contexts/BoardContext"
 
 interface Props {
@@ -8,8 +8,9 @@ interface Props {
 
 const DataCenter = ({ children }: Props) => {
   const [board, setBoard] = useState<Board | null>(null)
+  const [playlogs, setPlaylogs] = useState<Playlog[]>([])
 
-  const find = useCallback(async (uuid: string, boardNumber: number) => {
+  const findBoard = useCallback(async (uuid: string, boardNumber: number) => {
     const res = await fetch(`/api/board/${uuid}/${boardNumber}`)
     if (!res.ok) {
       throw new Error(`Failed to fetch board: ${res.status} ${res.statusText}`)
@@ -19,8 +20,18 @@ const DataCenter = ({ children }: Props) => {
     setBoard(data)
   }, [])
 
+  const findPlaylogs = useCallback(async (uuid: string, boardNumber: number) => {
+    const res = await fetch(`/api/playlogs/${uuid}/${boardNumber}`)
+    if (!res.ok) {
+      throw new Error(`Failed to fetch playlogs: ${res.status} ${res.statusText}`)
+    }
+
+    const data: Playlog[] = await res.json()
+    setPlaylogs(data)
+  }, [])
+
   return (
-    <BoardContext.Provider value={{ board, setBoard, find }}>
+    <BoardContext.Provider value={{ board, setBoard, findBoard, playlogs, setPlaylogs, findPlaylogs }}>
       {children}
     </BoardContext.Provider>
   )

@@ -19,3 +19,16 @@ export interface Board {
   west_diamond: string
   west_club: string
 }
+
+export interface Playlog {
+  id: number
+  uuid: string
+  room: string
+  board_number: string
+  auction: string
+  contract: string
+  result: string | null
+  play: string[][]
+  created_at: string
+  updated_at: string
+}
