@@ -1,10 +1,15 @@
 .board-play-history
   width: 100%
+  max-height: 264px
+  overflow-y: scroll
   margin: 0
   padding: 0
   list-style: none
+  background: $color-white
+  border-radius: 8px
 
   &__trick
+    height: 52px
     display: grid
     grid-template-columns: 5rem 1fr
     align-items: center

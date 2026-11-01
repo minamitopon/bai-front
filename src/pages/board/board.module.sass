@@ -1,2 +1,14 @@
 .board
   width: 100%
+  display: grid
+  grid-template-columns: minmax(0, 1fr) 320px
+  gap: $spacing-l
+  padding: $spacing-l
+
+.board-left
+  display: grid
+  min-width: 0
+  gap: $spacing-l
+
+.board-right
+  min-width: 0

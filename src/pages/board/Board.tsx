@@ -25,9 +25,25 @@ const Board = () => {
     }
   }, [uuid, boardNumber, find]);
 
+  const mockPlayLog = [
+      ["hJ", "h2", "h4", "hA"],
+      ["sK", "s4", "s3", "sA"],
+      ["c9", "cA", "c3", "c2"],
+      ["s9", "s8", "s2", "s7"],
+      ["s5", "c6", "sJ", "s6"],
+      ["hK", "h6", "c5", "h9"],
+      ["hQ", "h7", "cJ", "hT"],
+      ["d5", "d9", "dJ", "dK"],
+      ["cK", "cQ", "c4", "sT"],
+      ["sQ", "cT", "h3", "c7"],
+      ["d2", "d4", "dQ", "d3"],
+      ["d6", "dT", "dA", "d7"],
+      ["d8", "c8", "h5", "h8"],
+    ]
+
   return (
-    <div className={styles.board}>
-      <div>
+    <div className={styles["board"]}>
+      <div className={styles["board-left"]}>
         <BoardHands
           hands={board ? [
             toHand(board, "north"),
@@ -36,9 +52,9 @@ const Board = () => {
             toHand(board, "west"),
           ] : []}
         />
-        <BoardPlayHistory playLog={[]} />
+        <BoardPlayHistory playLog={mockPlayLog} />
       </div>
-      <div></div>
+      <div className={styles["board-right"]}></div>
     </div>
   );
 };
