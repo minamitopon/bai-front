@@ -7,7 +7,7 @@ const meta = {
   tags: ["autodocs"],
   args: {
     boardNumber: 2,
-    auctions: [{ room: "o", auction: "2D! p 2N! p 3C! p 3D! d 3S! p 4H p p p" }],
+    auction: "2D! p 2N! p 3C! p 3D! d 3S! p 4H p p p",
   },
 } satisfies Meta<typeof BoardAuction>
 

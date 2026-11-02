@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Button from "@/components/primitive/Button/Button";
 import BoardHands from "@/components/pages/board/BoardHands/BoardHands";
@@ -20,6 +20,7 @@ const toHand = (board: BoardData, direction: "north" | "east" | "south" | "west"
 const Board = () => {
   const { uuid, boardNumber } = useParams();
   const { board, playlogs, findBoard, findPlaylogs } = useBoardContext();
+  const [selectedRoom, setSelectedRoom] = useState("o");
 
   const parsedBoardNumber = Number(boardNumber);
   const persedHands = board ? [
@@ -40,46 +41,46 @@ const Board = () => {
     window.history.back();
   }
 
-  // const mockPlayLog = [
-  //     ["hJ", "h2", "h4", "hA"],
-  //     ["sK", "s4", "s3", "sA"],
-  //     ["c9", "cA", "c3", "c2"],
-  //     ["s9", "s8", "s2", "s7"],
-  //     ["s5", "c6", "sJ", "s6"],
-  //     ["hK", "h6", "c5", "h9"],
-  //     ["hQ", "h7", "cJ", "hT"],
-  //     ["d5", "d9", "dJ", "dK"],
-  //     ["cK", "cQ", "c4", "sT"],
-  //     ["sQ", "cT", "h3", "c7"],
-  //     ["d2", "d4", "dQ", "d3"],
-  //     ["d6", "dT", "dA", "d7"],
-  //     ["d8", "c8", "h5", "h8"],
-  //   ]
-  
-  // const mockAuction = "2D! p 2N! p 3C! p 3D! d 3S! p 4H p p p"
-  const auctions = playlogs.map(({ room, auction }) => ({ room, auction }))
-  const playlogsData = playlogs.map(({ room, play }) => ({ room, play }))
+  const handleChangeRoom = (room: string) => () => {
+    setSelectedRoom(room);
+  };
+
+  const selectedPlaylog = playlogs.find(({ room }) => room === selectedRoom)
 
   return (
     <div className={styles["board"]}>
-      <div className={styles["board-left"]}>
+      <div className={styles["board__left"]}>
         <BoardHands
           hands={persedHands}
         />
-        <BoardPlayHistory playLogs={playlogsData} />
+        <BoardPlayHistory playLog={selectedPlaylog?.play ?? []} />
       </div>
-      <div className={styles["board-right"]}>
+      <div className={styles["board__right"]}>
+        <div className={styles["board__room-select-buttons"]}>
+          <Button
+            label="Open"
+            width="100%"
+            isActive={selectedRoom === "o"}
+            onClick={handleChangeRoom("o")}
+          />
+          <Button
+            label="Close"
+            width="100%"
+            isActive={selectedRoom === "c"}
+            onClick={handleChangeRoom("c")}
+          />
+        </div>
+        <BoardAuction
+          boardNumber={parsedBoardNumber}
+          auction={selectedPlaylog?.auction ?? ""}
+        />
+        <BoardAnalysis hands={persedHands} />
         <Button
           label="Back to List"
           width="100%"
           icon="arrowBack"
           onClick={handleBack}
         />
-        <BoardAuction
-          boardNumber={parsedBoardNumber}
-          auctions={auctions}
-        />
-        <BoardAnalysis hands={persedHands} />
       </div>
     </div>
   );

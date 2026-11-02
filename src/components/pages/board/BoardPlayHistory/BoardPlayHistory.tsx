@@ -3,7 +3,7 @@ import styles from "@/components/pages/board/BoardPlayHistory/boardPlayHistory.m
 import type { Suit } from "@/types/components";
 
 interface Props {
-  playLogs: { room: string; play: string[][] }[];
+  playLog: string[][];
 }
 
 const cardSuits = ["s", "h", "d", "c"] as const;
@@ -11,9 +11,7 @@ const cardSuits = ["s", "h", "d", "c"] as const;
 const isCardSuit = (suit: string | undefined): suit is Exclude<Suit, "n"> =>
   cardSuits.some((cardSuit) => cardSuit === suit);
 
-const BoardPlayHistory = ({ playLogs }: Props) => {
-  const playLog = playLogs[0]?.play ?? [];
-
+const BoardPlayHistory = ({ playLog }: Props) => {
   return (
     <ol className={styles["board-play-history"]}>
       {playLog.map((trick, trickIndex) => (

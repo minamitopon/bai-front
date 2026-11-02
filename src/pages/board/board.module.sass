@@ -4,14 +4,16 @@
   grid-template-columns: minmax(0, 1fr) 320px
   gap: $spacing-l
   padding: $spacing-l
-
-.board-left
-  display: grid
-  min-width: 0
-  gap: $spacing-l
-
-.board-right
-  min-width: 0
-  display: flex
-  flex-direction: column
-  gap: $spacing-l
+  &__left
+    display: grid
+    min-width: 0
+    gap: $spacing-l
+  &__right
+    min-width: 0
+    display: flex
+    flex-direction: column
+    gap: $spacing-l
+  &__room-select-buttons
+    display: grid
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+    gap: $spacing-s
