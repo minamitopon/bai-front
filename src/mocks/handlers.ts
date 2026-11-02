@@ -3,6 +3,10 @@ import { http, HttpResponse } from "msw"
 import { matches } from "@/mocks/api/matches/get"
 import type { SearchCondition } from "@/interfaces/pages/search"
 
+import { hands } from "@/mocks/api/hand/get"
+import { playlogs } from "@/mocks/api/playlogs/get"
+
+
 export const handlers = [
   http.get('/api/user', () => {
     return HttpResponse.json({ id: 1, name: 'Taro Yamada' })
@@ -40,5 +44,17 @@ export const handlers = [
     }
 
     return HttpResponse.json(results)
+  }),
+
+  http.get('/api/board/:uuid/:boardNumber', ({ params }) => {
+    const { uuid, boardNumber } = params;
+    const hand = hands.find(h => h.uuid === uuid && h.board === Number(boardNumber))
+    return HttpResponse.json(hand)
+  }),
+
+  http.get('/api/playlogs/:uuid/:boardNumber', ({ params }) => {
+    const { uuid, boardNumber } = params;
+    const matchedPlaylogs = playlogs.filter(p => p.uuid === uuid && p.board_number === boardNumber)
+    return HttpResponse.json(matchedPlaylogs)
   })
 ];

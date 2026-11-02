@@ -13,7 +13,7 @@ const meta = {
       hands: { spade: "", heart: "", diamond: "", club: "" },
       auction: [],
     },
-    updateConditions: () => {},
+    onSearch: () => {},
   }
 } satisfies Meta<typeof SearchConditionMenu>
 
@@ -30,6 +30,6 @@ export const Default: Story = {
       hands: { spade: "", heart: "", diamond: "", club: "" },
       auction: [],
     },
-    updateConditions: () => {},
+    onSearch: () => {},
   },
 }

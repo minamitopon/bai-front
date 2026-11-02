@@ -8,6 +8,7 @@ const Footer = () => {
         text="© 2026 Bridge Auction Intelligence. All Rights Reserved. Tournament data sourced from Bridge Base Online."
         align="center"
         color="secondary"
+        size="xs"
       />
     </footer>
   )

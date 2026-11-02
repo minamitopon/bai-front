@@ -8,7 +8,7 @@ export type Color =
   | "white"
   | "primary"
   | "secondary";
-export type Size = "s" | "m" | "l" | "unlimited";
+export type Size = "xs" | "s" | "m" | "l" | "unlimited";
 export type Weight = "normal" | "bold";
 export type IconName =
   | "filter"
@@ -21,6 +21,7 @@ export type IconName =
   | "hint";
 export type Space = "xs" | "s" | "m" | "l" | "xl";
 export type Align = "left" | "center" | "right";
+export type Direction = "north" | "east" | "south" | "west";
 
 export type Call = {
   id: number;
@@ -29,3 +30,5 @@ export type Call = {
     | (typeof SUIT)[keyof typeof SUIT]
     | (typeof CALL_OPTION)[keyof typeof CALL_OPTION];
 };
+
+export type Suit = "s" | "h" | "d" | "c" | "n";

@@ -1,0 +1,31 @@
+.board-analysis
+  max-width: 318px
+  border: 1px solid $color-board-border
+  border-radius: $spacing-s
+  background: $color-white
+  overflow: hidden
+
+  &__header
+    padding: $spacing-s $spacing-m
+    background: $color-background
+
+  &__body
+    padding: $spacing-m
+
+  &__table
+    width: 100%
+
+    th,
+    td
+      height: 36px
+      text-align: center
+      vertical-align: middle
+
+    thead th
+      border-bottom: 1px solid $color-board-border
+      color: $color-text-secondary
+      font-size: $font-size-s
+
+    td
+      color: $color-text-primary
+      font-weight: $font-weight-semibold

@@ -1,7 +1,7 @@
 import { SUIT, CALL_OPTION } from "@/types/components/enum"
 import Button from "@/components/primitive/Button/Button";
 import Icon from "@/components/primitive/Icon/Icon";
-import type { IconName, Call } from "@/types/components";
+import type { Color, IconName, Call } from "@/types/components";
 import styles from "@/components/primitive/Bidding/bidding.module.sass"
 
 interface Props {
@@ -72,7 +72,7 @@ const Bidding = (props: Props) => {
                 {bid.suit === SUIT.NOTRUMP ? (
                   "NT"
                 ) : (
-                  <Icon name={bid.suit as IconName} size="s" />
+                  <Icon name={bid.suit as IconName} size="s" color={bid.suit as Color} />
                 )}
               </>
             }
